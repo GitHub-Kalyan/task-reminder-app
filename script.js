@@ -217,6 +217,8 @@ class TaskReminderApp {
 
     // Celebration function for task completion
     celebrateTaskCompletion() {
+        console.log('🎉 Celebration started!');
+        
         // Play completion sound
         this.playCompletionSound();
         
@@ -229,6 +231,8 @@ class TaskReminderApp {
 
     // Show celebration text overlay
     showCelebrationText() {
+        console.log('📝 Showing celebration text');
+        
         // Create celebration overlay
         const overlay = document.createElement('div');
         overlay.className = 'celebration-overlay';
@@ -250,22 +254,32 @@ class TaskReminderApp {
 
     // Play completion sound
     playCompletionSound() {
+        console.log('🔊 Playing completion sound');
         try {
             const audio = document.getElementById('completionSound');
             if (audio) {
+                console.log('🎵 Audio element found');
                 audio.currentTime = 0; // Reset to beginning
-                audio.play().catch(e => console.log('Audio play failed:', e));
+                audio.play().then(() => {
+                    console.log('✅ Sound played successfully');
+                }).catch(e => {
+                    console.log('❌ Audio play failed:', e);
+                });
+            } else {
+                console.log('❌ Audio element not found');
             }
         } catch (error) {
-            console.log('Sound play error:', error);
+            console.log('❌ Sound play error:', error);
         }
     }
 
     // Trigger confetti animation
     triggerConfetti() {
+        console.log('🎊 Triggering confetti');
         try {
             // Check if confetti library is loaded
             if (typeof confetti !== 'undefined') {
+                console.log('✅ Confetti library loaded');
                 // Create a colorful confetti burst
                 confetti({
                     particleCount: 100,
@@ -283,10 +297,18 @@ class TaskReminderApp {
                         colors: ['#ff9a9e', '#fecfef', '#fecfef', '#ffecd2', '#fcb69f']
                     });
                 }, 200);
+            } else {
+                console.log('❌ Confetti library not loaded');
             }
         } catch (error) {
-            console.log('Confetti error:', error);
+            console.log('❌ Confetti error:', error);
         }
+    }
+
+    // Test function to manually trigger celebrations
+    testCelebration() {
+        console.log('🧪 Testing celebration effects');
+        this.celebrateTaskCompletion();
     }
 
     // Enhanced Edit Functionality
