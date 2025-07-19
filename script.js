@@ -1,3 +1,26 @@
+// Global test function
+window.testCelebration = function() {
+    console.log('🧪 Test celebration button clicked!');
+    
+    if (window.app && window.app.testCelebration) {
+        console.log('✅ Calling app.testCelebration()');
+        window.app.testCelebration();
+    } else {
+        console.log('❌ App not ready, showing basic celebration');
+        // Fallback celebration
+        if (typeof confetti !== 'undefined') {
+            confetti({
+                particleCount: 50,
+                spread: 50,
+                origin: { y: 0.6 }
+            });
+        }
+        
+        // Show a simple alert
+        alert('🎉 Test Celebration! 🎉');
+    }
+};
+
 // Task Reminder App - Main JavaScript File
 
 class TaskReminderApp {
@@ -605,10 +628,11 @@ class TaskReminderApp {
 let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new TaskReminderApp();
+    window.app = app; // Make app globally accessible
     app.requestNotificationPermission();
     
     // Make test function globally accessible
-    window.testCelebration = () => app.testCelebration();
+    // window.testCelebration = () => app.testCelebration(); // This line is now redundant as testCelebration is defined directly on window
 });
 
 // Add slideOut animation to CSS
