@@ -166,7 +166,9 @@ body {
 }
 
 .btn-success:hover {
-    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+    transition: all 0.3s ease;
 }
 
 /* Tasks Section */
@@ -369,6 +371,7 @@ body {
     background: #f0fdf4;
     border-color: #bbf7d0;
     opacity: 0.8;
+    animation: taskCompleted 0.5s ease-in-out;
 }
 
 .task-item.completed .task-title {
@@ -536,4 +539,52 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+} 
+
+/* Celebration Effects */
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.celebration-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #667eea;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: celebrationPulse 2s ease-in-out;
+    opacity: 0;
+}
+
+@keyframes celebrationPulse {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Enhanced button hover effects for completion */
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Task completion animation */
+.task-item.completed {
+    animation: taskCompleted 0.5s ease-in-out;
+}
+
+@keyframes taskCompleted {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 } 

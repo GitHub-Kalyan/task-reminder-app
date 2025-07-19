@@ -204,9 +204,88 @@ class TaskReminderApp {
                 
                 const message = newStatus === 'completed' ? 'Task marked as completed!' : 'Task marked as pending!';
                 this.showNotification(message, 'success');
+                
+                // Add celebration effects when task is completed
+                if (newStatus === 'completed') {
+                    this.celebrateTaskCompletion();
+                }
             } catch (error) {
                 this.showNotification('Failed to update task. Please try again.', 'error');
             }
+        }
+    }
+
+    // Celebration function for task completion
+    celebrateTaskCompletion() {
+        // Play completion sound
+        this.playCompletionSound();
+        
+        // Trigger confetti
+        this.triggerConfetti();
+        
+        // Show celebration text
+        this.showCelebrationText();
+    }
+
+    // Show celebration text overlay
+    showCelebrationText() {
+        // Create celebration overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'celebration-overlay';
+        
+        const text = document.createElement('div');
+        text.className = 'celebration-text';
+        text.textContent = '🎉 Task Completed! 🎉';
+        
+        overlay.appendChild(text);
+        document.body.appendChild(overlay);
+        
+        // Remove overlay after animation
+        setTimeout(() => {
+            if (overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }, 2000);
+    }
+
+    // Play completion sound
+    playCompletionSound() {
+        try {
+            const audio = document.getElementById('completionSound');
+            if (audio) {
+                audio.currentTime = 0; // Reset to beginning
+                audio.play().catch(e => console.log('Audio play failed:', e));
+            }
+        } catch (error) {
+            console.log('Sound play error:', error);
+        }
+    }
+
+    // Trigger confetti animation
+    triggerConfetti() {
+        try {
+            // Check if confetti library is loaded
+            if (typeof confetti !== 'undefined') {
+                // Create a colorful confetti burst
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7']
+                });
+                
+                // Add a second burst after a short delay
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 50,
+                        spread: 50,
+                        origin: { y: 0.8 },
+                        colors: ['#ff9a9e', '#fecfef', '#fecfef', '#ffecd2', '#fcb69f']
+                    });
+                }, 200);
+            }
+        } catch (error) {
+            console.log('Confetti error:', error);
         }
     }
 
