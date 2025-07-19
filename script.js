@@ -606,6 +606,9 @@ let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new TaskReminderApp();
     app.requestNotificationPermission();
+    
+    // Make test function globally accessible
+    window.testCelebration = () => app.testCelebration();
 });
 
 // Add slideOut animation to CSS

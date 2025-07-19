@@ -35,9 +35,9 @@
     "description": "",
     "dueDate": "2025-07-19T21:00",
     "priority": "high",
-    "status": "pending",
+    "status": "completed",
     "createdAt": "2025-07-19T14:14:45.104210",
-    "completedAt": null
+    "completedAt": "2025-07-19T09:38:28.465Z"
   },
   {
     "id": "1752917270035",
